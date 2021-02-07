@@ -38,6 +38,10 @@ kafka-server-start() {
 	bin/kafka-server-start.sh config/server.properties
 }
 
+which wget &> /dev/null || {
+	echo "Install wget!"
+	return 1
+}
 case "$OSTYPE" in
   darwin*)
     which gsed &> /dev/null || {
