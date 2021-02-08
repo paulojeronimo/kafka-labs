@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.10">
 <meta name="author" content="Paulo Jerônimo">
-<title>Kafka Tutorial</title>
+<title>Kafka labs</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -440,31 +440,32 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>Kafka Tutorial</h1>
+<h1>Kafka labs</h1>
 <div class="details">
 <span id="author" class="author">Paulo Jerônimo</span><br>
 <span id="email" class="email"><a href="mailto:pj@paulojeronimo.com">pj@paulojeronimo.com</a></span><br>
-<span id="revdate">2021-02-08 07:12:59 -0300</span>
+<span id="revdate">2021-02-08 10:46:01 -0300</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#introduction">1. Introduction</a></li>
-<li><a href="#download-this-tutorial-and-load-its-functions">2. Download this tutorial and load its functions</a></li>
-<li><a href="#lab-1-quickstart-using-a-jvm">3. Lab 1: Quickstart (using a JVM)</a>
+<li><a href="#labs-download-and-installation">2. Labs download and installation</a></li>
+<li><a href="#lab1">3. Lab1: Quickstart (using a JVM)</a>
 <ul class="sectlevel2">
 <li><a href="#prerequisites">3.1. Prerequisites</a></li>
 <li><a href="#download-extract-kafka-and-change-to-its-directory">3.2. Download, extract Kafka, and change to its directory</a></li>
-<li><a href="#start-a-zookeeper-server">3.3. Start a ZooKeeper server</a></li>
-<li><a href="#start-a-kafka-server">3.4. Start a Kafka server</a></li>
-<li><a href="#create-a-topic">3.5. Create a topic</a></li>
-<li><a href="#start-a-producer">3.6. Start a producer</a></li>
-<li><a href="#start-a-consumer">3.7. Start a consumer</a></li>
-<li><a href="#terminate-the-kafka-environment">3.8. Terminate the Kafka environment</a></li>
-<li><a href="#references">3.9. References</a></li>
+<li><a href="#start-tmux">3.3. Start tmux</a></li>
+<li><a href="#start-a-zookeeper-server">3.4. Start a ZooKeeper server</a></li>
+<li><a href="#start-a-kafka-server">3.5. Start a Kafka server</a></li>
+<li><a href="#create-a-topic">3.6. Create a topic</a></li>
+<li><a href="#start-a-producer">3.7. Start a producer</a></li>
+<li><a href="#start-a-consumer">3.8. Start a consumer</a></li>
+<li><a href="#terminate-the-kafka-environment">3.9. Terminate the Kafka environment</a></li>
+<li><a href="#references">3.10. References</a></li>
 </ul>
 </li>
-<li><a href="#lab-2-quickstart-using-docker">4. Lab 2: Quickstart (using Docker)</a>
+<li><a href="#lab2">4. Lab2: Quickstart (using Docker)</a>
 <ul class="sectlevel2">
 <li><a href="#prerequisites-2">4.1. Prerequisites</a></li>
 <li><a href="#launch-confluent-platform">4.2. Launch Confluent Platform</a></li>
@@ -486,37 +487,44 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="introduction"><a class="anchor" href="#introduction"></a>1. Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This is my <a href="https://kafka.apache.org" target="_blank" rel="noopener">Kafka</a> tutorial.</p>
+<p>This is my <a href="https://kafka.apache.org" target="_blank" rel="noopener">Kafka</a> labs which I developed by reading and modifying
+some tutorials that I read on the Internet (I left the references
+available).</p>
 </div>
 <div class="paragraph">
-<p>Here I create my own version of some Kafka tutorials available on the
-Internet. When I develop my tutorials, I usually add
-<a href="https://github.com/paulojeronimo/kafka-tutorial/blob/main/functions.sh" target="_blank" rel="noopener">some functions written in Bash</a> to make
-them more fluent in its execution through a command line.</p>
+<p>When I develop my labs, I usually add <a href="https://github.com/paulojeronimo/kafka-labs/blob/main/functions.sh" target="_blank" rel="noopener">some
+functions written in Bash</a> to make them more fluent in its execution
+through a command line (inside a <a href="https://github.com/tmux/tmux/wiki" target="_blank" rel="noopener">tmux</a> session) on a macOS or Linux
+environment.</p>
+</div>
+<div class="paragraph">
+<p>Currently, these are the labs that I developed:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="#lab1">Lab1: Quickstart (using a JVM)</a></p>
+</li>
+<li>
+<p><a href="#lab2">Lab2: Quickstart (using Docker)</a></p>
+</li>
+</ol>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="download-this-tutorial-and-load-its-functions"><a class="anchor" href="#download-this-tutorial-and-load-its-functions"></a>2. Download this tutorial and load its functions</h2>
+<h2 id="labs-download-and-installation"><a class="anchor" href="#labs-download-and-installation"></a>2. Labs download and installation</h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre>$ git clone https://github.com/paulojeronimo/kafka-tutorial
+<pre>$ git clone https://github.com/paulojeronimo/kafka-labs
 $ cd `basename $_` &amp;&amp; source functions.sh</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Start <a href="https://github.com/tmux/tmux/wiki" target="_blank" rel="noopener">tmux</a> (this is an optional step):</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>$ tmux</pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="lab-1-quickstart-using-a-jvm"><a class="anchor" href="#lab-1-quickstart-using-a-jvm"></a>3. Lab 1: Quickstart (using a JVM)</h2>
+<h2 id="lab1"><a class="anchor" href="#lab1"></a>3. Lab1: Quickstart (using a JVM)</h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="prerequisites"><a class="anchor" href="#prerequisites"></a>3.1. Prerequisites</h3>
@@ -540,7 +548,7 @@ OpenJDK 64-Bit Server VM (AdoptOpenJDK)(build 25.275-b01, mixed mode)</pre>
 <h3 id="download-extract-kafka-and-change-to-its-directory"><a class="anchor" href="#download-extract-kafka-and-change-to-its-directory"></a>3.2. Download, extract Kafka, and change to its directory</h3>
 <div class="listingblock">
 <div class="content">
-<pre>$ kafka-download &amp;&amp; kafka-extract &amp;&amp; lab1-dir</pre>
+<pre>$ kafka-labs &amp;&amp; kafka-download &amp;&amp; kafka-extract &amp;&amp; lab1-dir</pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -550,14 +558,40 @@ OpenJDK 64-Bit Server VM (AdoptOpenJDK)(build 25.275-b01, mixed mode)</pre>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-These are functions that I created in <a href="https://github.com/paulojeronimo/kafka-tutorial/blob/main/functions.sh" target="_blank" rel="noopener">functions.sh</a>.
+These are functions that I created in <a href="https://github.com/paulojeronimo/kafka-labs/blob/main/functions.sh" target="_blank" rel="noopener">functions.sh</a>.
 </td>
 </tr>
 </table>
 </div>
 </div>
 <div class="sect2">
-<h3 id="start-a-zookeeper-server"><a class="anchor" href="#start-a-zookeeper-server"></a>3.3. Start a ZooKeeper server</h3>
+<h3 id="start-tmux"><a class="anchor" href="#start-tmux"></a>3.3. Start tmux</h3>
+<div class="paragraph">
+<p>Start <a href="https://github.com/tmux/tmux/wiki" target="_blank" rel="noopener">tmux</a>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ tmux new -s lab1</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Subsequent terminal creations through tmux will be set the current
+directory to where the session where started.
+In this case, this is the directory where the Kafka package where
+extracted.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="start-a-zookeeper-server"><a class="anchor" href="#start-a-zookeeper-server"></a>3.4. Start a ZooKeeper server</h3>
 <div class="listingblock">
 <div class="content">
 <pre>$ # terminal 1
@@ -579,7 +613,7 @@ The command above can be also called through the function
 </div>
 </div>
 <div class="sect2">
-<h3 id="start-a-kafka-server"><a class="anchor" href="#start-a-kafka-server"></a>3.4. Start a Kafka server</h3>
+<h3 id="start-a-kafka-server"><a class="anchor" href="#start-a-kafka-server"></a>3.5. Start a Kafka server</h3>
 <div class="paragraph">
 <p>Open another terminal (<code>terminal 2</code> - <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>b</kbd>+<kbd>"</kbd></span> on tmux) and start
 a broker instance:</p>
@@ -587,7 +621,7 @@ a broker instance:</p>
 <div class="listingblock">
 <div class="content">
 <pre>$ # terminal 2
-$ lab1-dir; bin/kafka-server-start.sh config/server.properties</pre>
+$ bin/kafka-server-start.sh config/server.properties</pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -607,7 +641,7 @@ $ lab1-dir; bin/kafka-server-start.sh config/server.properties</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="create-a-topic"><a class="anchor" href="#create-a-topic"></a>3.5. Create a topic</h3>
+<h3 id="create-a-topic"><a class="anchor" href="#create-a-topic"></a>3.6. Create a topic</h3>
 <div class="paragraph">
 <p>Open another terminal (<code>terminal 3</code> - <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>b</kbd>+<kbd>c</kbd></span> on tmux) and create
 a topic:</p>
@@ -615,7 +649,7 @@ a topic:</p>
 <div class="listingblock">
 <div class="content">
 <pre>$ # terminal 3
-$ lab1-dir; bin/kafka-topics.sh \
+$ bin/kafka-topics.sh \
 --create --topic quickstart-events --bootstrap-server localhost:9092</pre>
 </div>
 </div>
@@ -631,20 +665,27 @@ $ bin/kafka-topics.sh \
 </div>
 </div>
 <div class="sect2">
-<h3 id="start-a-producer"><a class="anchor" href="#start-a-producer"></a>3.6. Start a producer</h3>
+<h3 id="start-a-producer"><a class="anchor" href="#start-a-producer"></a>3.7. Start a producer</h3>
 <div class="listingblock">
 <div class="content">
 <pre>$ # terminal 3
 $ bin/kafka-console-producer.sh \
---topic quickstart-events --bootstrap-server localhost:9092
-&gt;This is my first event
+--topic quickstart-events --bootstrap-server localhost:9092</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Send some events:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&gt;This is my first event
 &gt;This is my second event
 &gt;</pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="start-a-consumer"><a class="anchor" href="#start-a-consumer"></a>3.7. Start a consumer</h3>
+<h3 id="start-a-consumer"><a class="anchor" href="#start-a-consumer"></a>3.8. Start a consumer</h3>
 <div class="paragraph">
 <p>Open another terminal (<code>terminal 4</code> - <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>b</kbd>+<kbd>"</kbd></span> on tmux) and start
 a consumer:</p>
@@ -652,16 +693,23 @@ a consumer:</p>
 <div class="listingblock">
 <div class="content">
 <pre>$ # terminal 4
-$ lab1-dir; bin/kafka-console-consumer.sh \
+$ bin/kafka-console-consumer.sh \
 --topic quickstart-events --bootstrap-server localhost:9092 \
---from-beginning
-This is my first event
+--from-beginning</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is the expected output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>This is my first event
 This is my second event</pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="terminate-the-kafka-environment"><a class="anchor" href="#terminate-the-kafka-environment"></a>3.8. Terminate the Kafka environment</h3>
+<h3 id="terminate-the-kafka-environment"><a class="anchor" href="#terminate-the-kafka-environment"></a>3.9. Terminate the Kafka environment</h3>
 <div class="paragraph">
 <p>Type <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>C</kbd></span> then <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>D</kbd></span> on terminals 4, 3, 2 (in this
 order). Type <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>C</kbd></span> on terminal 1 to terminate the ZooKeeper
@@ -678,7 +726,7 @@ $ rm -rf /tmp/kafka-logs /tmp/zookeeper</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="references"><a class="anchor" href="#references"></a>3.9. References</h3>
+<h3 id="references"><a class="anchor" href="#references"></a>3.10. References</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -690,7 +738,7 @@ $ rm -rf /tmp/kafka-logs /tmp/zookeeper</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="lab-2-quickstart-using-docker"><a class="anchor" href="#lab-2-quickstart-using-docker"></a>4. Lab 2: Quickstart (using Docker)</h2>
+<h2 id="lab2"><a class="anchor" href="#lab2"></a>4. Lab2: Quickstart (using Docker)</h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="prerequisites-2"><a class="anchor" href="#prerequisites-2"></a>4.1. Prerequisites</h3>
@@ -721,7 +769,7 @@ docker-compose version 1.27.4, build 40524192</pre>
 <h3 id="launch-confluent-platform"><a class="anchor" href="#launch-confluent-platform"></a>4.2. Launch Confluent Platform</h3>
 <div class="listingblock">
 <div class="content">
-<pre>$ lab2-dir</pre>
+<pre>$ lab2-dir &amp;&amp; tmux new -s lab2</pre>
 </div>
 </div>
 <div class="listingblock">
@@ -745,17 +793,27 @@ $ docker-compose logs -f</pre>
 <div class="listingblock">
 <div class="content">
 <pre>$ # terminal 2
-$ lab2-dir; docker-compose exec kafka kafka-topics \
+$ docker-compose exec kafka kafka-topics \
 --create --topic example-topic --bootstrap-server kafka:9092 \
 --replication-factor 1 --partitions 1</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Describe the topic:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre>$ # terminal 2
 $ docker-compose exec kafka kafka-topics \
---describe --topic example-topic --bootstrap-server kafka:9092
-Topic: example-topic    PartitionCount: 1       ReplicationFactor: 1 Configs:
+--describe --topic example-topic --bootstrap-server kafka:9092</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Expected output for the command above:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Topic: example-topic    PartitionCount: 1       ReplicationFactor: 1 Configs:
         Topic: example-topic    Partition: 0    Leader: 1 Replicas: 1     Isr: 1</pre>
 </div>
 </div>
@@ -779,10 +837,17 @@ $ kafka-console-consumer \
 <div class="listingblock">
 <div class="content">
 <pre>$ # terminal 3
-$ lab2-dir; docker-compose exec kafka bash
+$ docker-compose exec kafka bash
 $ kafka-console-producer \
---topic example-topic --broker-list kafka:9092
-&gt;a
+--topic example-topic --broker-list kafka:9092</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Send some events:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&gt;a
 &gt;b
 &gt;c
 &gt;</pre>
@@ -808,7 +873,7 @@ the Control Center.</p>
 <div class="listingblock">
 <div class="content">
 <pre>$ # terminal 4
-$ lab2-dir; docker-compose exec kafka bash
+$ docker-compose exec kafka bash
 $ kafka-console-consumer \
 --topic example-topic --bootstrap-server kafka:9092 --from-beginning</pre>
 </div>
@@ -853,7 +918,7 @@ $ # Type <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>C</kbd></span></pre>
 <pre>$ # terminal 3
 $ kafka-console-consumer \
 --topic example-topic --bootstrap-server kafka:9092 \
---property print.key=true --property key.separator="-" \</pre>
+--property print.key=true --property key.separator="-"</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -869,7 +934,8 @@ fun:not quarantine</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Observe the output shown on <code>terminal 2</code> and <code>terminal 3</code>.</p>
+<p>Observe the output shown on <code>terminal 2</code>, <code>terminal 3</code> and Control
+Center.</p>
 </div>
 </div>
 <div class="sect2">
