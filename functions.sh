@@ -12,9 +12,14 @@ kafka-tut() {
 	cd "$KAFKA_TUT"
 }
 
-kafka-dir() {
+lab1-dir() {
 	kafka-tut
-	! [ -d $KAFKA_DIR ] || cd $KAFKA_DIR
+	cd $KAFKA_DIR
+}
+
+lab2-dir() {
+	kafka-tut
+	cd final/quickstart-docker
 }
 
 kafka-download() {(
@@ -56,7 +61,7 @@ case "$OSTYPE" in
     function grep { ggrep "$@"; }
 esac
 type jdk &> /dev/null && jdk 1.8
-kafka-dir
+kafka-tut
 profile=~/.bash_profile
 [[ $OSTYPE =~ ^linux ]] && profile=~/.bashrc
 functions_sh=$KAFKA_TUT/functions.sh
