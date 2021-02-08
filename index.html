@@ -444,7 +444,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="details">
 <span id="author" class="author">Paulo Jerônimo</span><br>
 <span id="email" class="email"><a href="mailto:pj@paulojeronimo.com">pj@paulojeronimo.com</a></span><br>
-<span id="revdate">2021-02-08 15:06:17 -0300</span>
+<span id="revdate">2021-02-08 18:29:31 -0300</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -481,12 +481,26 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#lab3">5. Lab3: Starting Kafka with 3 Brokers and 3 Partitions (using a JVM)</a>
 <ul class="sectlevel2">
-<li><a href="#download-extract-kafka-and-change-to-its-directory-2">5.1. Download, extract Kafka, and change to its directory</a></li>
-<li><a href="#configure-the-file-server-properties-for-the-kafka-servers">5.2. Configure the file server.properties for the Kafka servers</a></li>
-<li><a href="#start-the-kafka-cluster-1-zookeeper-3-brokers">5.3. Start the Kafka cluster (1 ZooKeeper + 3 Brokers)</a></li>
+<li><a href="#lab3-1">5.1. Download, extract Kafka, and change to its directory</a></li>
+<li><a href="#lab3-2">5.2. Configure the file server.properties for the Kafka servers</a></li>
+<li><a href="#lab3-3">5.3. Start the Kafka cluster (1 ZooKeeper + 3 Brokers)</a></li>
 <li><a href="#create-a-topic-3">5.4. Create a topic</a></li>
 <li><a href="#run-built-in-kafka-producer-to-generate-random-test-messages">5.5. Run built in Kafka producer to generate random test messages</a></li>
-<li><a href="#clean-up-2">5.6. Clean Up</a></li>
+<li><a href="#lab3-clean-up">5.6. Clean Up</a></li>
+</ul>
+</li>
+<li><a href="#lab4">6. Lab4: Creating Kafka producer/consumer applications in Java</a>
+<ul class="sectlevel2">
+<li><a href="#execution">6.1. Execution</a>
+<ul class="sectlevel3">
+<li><a href="#prepare-the-environment">6.1.1. Prepare the environment</a></li>
+<li><a href="#create-a-topic-4">6.1.2. Create a topic</a></li>
+<li><a href="#run-the-consumer-application">6.1.3. Run the consumer application</a></li>
+<li><a href="#running-the-producer-application">6.1.4. Running the producer application</a></li>
+</ul>
+</li>
+<li><a href="#tutorial">6.2. Tutorial</a></li>
+<li><a href="#clean-up-2">6.3. Clean Up</a></li>
 </ul>
 </li>
 </ul>
@@ -520,6 +534,9 @@ environment.</p>
 </li>
 <li>
 <p><a href="#lab3">Lab3: Starting Kafka with 3 Brokers and 3 Partitions (using a JVM)</a>.</p>
+</li>
+<li>
+<p><a href="#lab4">Lab4: Creating Kafka producer/consumer applications in Java</a>.</p>
 </li>
 </ol>
 </div>
@@ -977,7 +994,7 @@ $ docker-compose down -v</pre>
 <h2 id="lab3"><a class="anchor" href="#lab3"></a>5. Lab3: Starting Kafka with 3 Brokers and 3 Partitions (using a JVM)</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="download-extract-kafka-and-change-to-its-directory-2"><a class="anchor" href="#download-extract-kafka-and-change-to-its-directory-2"></a>5.1. Download, extract Kafka, and change to its directory</h3>
+<h3 id="lab3-1"><a class="anchor" href="#lab3-1"></a>5.1. Download, extract Kafka, and change to its directory</h3>
 <div class="listingblock">
 <div class="content">
 <pre>$ kafka-labs &amp;&amp; kafka-download &amp;&amp; kafka-extract &amp;&amp; lab3-dir</pre>
@@ -985,7 +1002,7 @@ $ docker-compose down -v</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="configure-the-file-server-properties-for-the-kafka-servers"><a class="anchor" href="#configure-the-file-server-properties-for-the-kafka-servers"></a>5.2. Configure the file server.properties for the Kafka servers</h3>
+<h3 id="lab3-2"><a class="anchor" href="#lab3-2"></a>5.2. Configure the file server.properties for the Kafka servers</h3>
 <div class="listingblock">
 <div class="content">
 <pre>$ (cd config; for n in 2 3
@@ -999,7 +1016,7 @@ done)</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="start-the-kafka-cluster-1-zookeeper-3-brokers"><a class="anchor" href="#start-the-kafka-cluster-1-zookeeper-3-brokers"></a>5.3. Start the Kafka cluster (1 ZooKeeper + 3 Brokers)</h3>
+<h3 id="lab3-3"><a class="anchor" href="#lab3-3"></a>5.3. Start the Kafka cluster (1 ZooKeeper + 3 Brokers)</h3>
 <div class="listingblock">
 <div class="content">
 <pre>$ tmux new-session -s lab3 \
@@ -1083,7 +1100,7 @@ you should notice the following output:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="clean-up-2"><a class="anchor" href="#clean-up-2"></a>5.6. Clean Up</h3>
+<h3 id="lab3-clean-up"><a class="anchor" href="#lab3-clean-up"></a>5.6. Clean Up</h3>
 <div class="paragraph">
 <p>Kill the ZooKeeper server and the Kafka brokers.
 After that, type:</p>
@@ -1092,6 +1109,94 @@ After that, type:</p>
 <div class="content">
 <pre>$ rm -rf /tmp/kafka-logs* /tmp/zookeeper</pre>
 </div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="lab4"><a class="anchor" href="#lab4"></a>6. Lab4: Creating Kafka producer/consumer applications in Java</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="execution"><a class="anchor" href="#execution"></a>6.1. Execution</h3>
+<div class="sect3">
+<h4 id="prepare-the-environment"><a class="anchor" href="#prepare-the-environment"></a>6.1.1. Prepare the environment</h4>
+<div class="paragraph">
+<p>Execute the following sessions in the previous lab (<a href="#lab3">Lab3: Starting Kafka with 3 Brokers and 3 Partitions (using a JVM)</a>):</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="#lab3-1">Download, extract Kafka, and change to its directory</a>.</p>
+</li>
+<li>
+<p><a href="#lab3-2">Configure the file server.properties for the Kafka servers</a>.</p>
+</li>
+<li>
+<p><a href="#lab3-3">Start the Kafka cluster (1 ZooKeeper + 3 Brokers)</a>.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="create-a-topic-4"><a class="anchor" href="#create-a-topic-4"></a>6.1.2. Create a topic</h4>
+<div class="paragraph">
+<p>Create a new tmux window (<span class="keyseq"><kbd>Ctrl</kbd>+<kbd>b</kbd>+<kbd>c</kbd></span> on tmux) and create a topic:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ bin/kafka-topics.sh --create --topic user-tracking \
+--zookeeper localhost:2181 \
+--replication-factor 3 --partitions 3
+Created topic user-tracking.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See the topic details:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ bin/kafka-topics.sh --describe —topic user-tracking \
+--zookeeper localhost:2181</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="run-the-consumer-application"><a class="anchor" href="#run-the-consumer-application"></a>6.1.3. Run the consumer application</h4>
+<div class="listingblock">
+<div class="content">
+<pre>$ lab4-dir &amp;&amp; cd user-tracking-consumer
+$ mvn compile exec:java -Dexec.mainClass="com.example.kafka.consumer.Main"</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="running-the-producer-application"><a class="anchor" href="#running-the-producer-application"></a>6.1.4. Running the producer application</h4>
+<div class="paragraph">
+<p>Start a new terminal (with <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>b</kbd>+<kbd>"</kbd></span> on tmux) and type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ lab4-dir &amp;&amp; cd user-tracking-producer
+$ mvn compile exec:java -Dexec.mainClass="com.example.kafka.producer.Main"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Repeat the last command many times while follow the output procuced by
+the consumer application.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="tutorial"><a class="anchor" href="#tutorial"></a>6.2. Tutorial</h3>
+<div class="paragraph">
+<p>TODO</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="clean-up-2"><a class="anchor" href="#clean-up-2"></a>6.3. Clean Up</h3>
+<div class="paragraph">
+<p>Follow the same steps described in the <a href="#lab3-clean-up">cleanup session
+of the previous lab</a>.</p>
 </div>
 </div>
 </div>
