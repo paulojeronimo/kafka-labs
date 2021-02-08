@@ -19,7 +19,17 @@ lab1-dir() {
 
 lab2-dir() {
 	kafka-labs
-	cd final/quickstart-docker
+	cd final/lab2
+}
+
+lab3-dir() {
+	kafka-labs
+	cd $KAFKA_DIR
+}
+
+configure-kafka-server() {
+	local server=$1
+	cp
 }
 
 kafka-download() {(
