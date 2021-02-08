@@ -444,7 +444,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="details">
 <span id="author" class="author">Paulo Jerônimo</span><br>
 <span id="email" class="email"><a href="mailto:pj@paulojeronimo.com">pj@paulojeronimo.com</a></span><br>
-<span id="revdate">2021-02-08 10:46:01 -0300</span>
+<span id="revdate">2021-02-08 15:06:17 -0300</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -479,6 +479,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#references-2">4.10. References</a></li>
 </ul>
 </li>
+<li><a href="#lab3">5. Lab3: Starting Kafka with 3 Brokers and 3 Partitions (using a JVM)</a>
+<ul class="sectlevel2">
+<li><a href="#download-extract-kafka-and-change-to-its-directory-2">5.1. Download, extract Kafka, and change to its directory</a></li>
+<li><a href="#configure-the-file-server-properties-for-the-kafka-servers">5.2. Configure the file server.properties for the Kafka servers</a></li>
+<li><a href="#start-the-kafka-cluster-1-zookeeper-3-brokers">5.3. Start the Kafka cluster (1 ZooKeeper + 3 Brokers)</a></li>
+<li><a href="#create-a-topic-3">5.4. Create a topic</a></li>
+<li><a href="#run-built-in-kafka-producer-to-generate-random-test-messages">5.5. Run built in Kafka producer to generate random test messages</a></li>
+<li><a href="#clean-up-2">5.6. Clean Up</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -503,10 +513,13 @@ environment.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><a href="#lab1">Lab1: Quickstart (using a JVM)</a></p>
+<p><a href="#lab1">Lab1: Quickstart (using a JVM)</a>.</p>
 </li>
 <li>
-<p><a href="#lab2">Lab2: Quickstart (using Docker)</a></p>
+<p><a href="#lab2">Lab2: Quickstart (using Docker)</a>.</p>
+</li>
+<li>
+<p><a href="#lab3">Lab3: Starting Kafka with 3 Brokers and 3 Partitions (using a JVM)</a>.</p>
 </li>
 </ol>
 </div>
@@ -956,6 +969,129 @@ $ docker-compose down -v</pre>
 <p><a href="https://kafka-tutorials.confluent.io/kafka-console-consumer-producer-basics/kafka.html?_ga=2.173142819.1879033804.1610968811-277195646.1610094980" target="_blank" rel="noopener">Kafka Tutorial: Console Producer and Consumer Basics, no (de)serializers using Kafka</a></p>
 </li>
 </ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="lab3"><a class="anchor" href="#lab3"></a>5. Lab3: Starting Kafka with 3 Brokers and 3 Partitions (using a JVM)</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="download-extract-kafka-and-change-to-its-directory-2"><a class="anchor" href="#download-extract-kafka-and-change-to-its-directory-2"></a>5.1. Download, extract Kafka, and change to its directory</h3>
+<div class="listingblock">
+<div class="content">
+<pre>$ kafka-labs &amp;&amp; kafka-download &amp;&amp; kafka-extract &amp;&amp; lab3-dir</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="configure-the-file-server-properties-for-the-kafka-servers"><a class="anchor" href="#configure-the-file-server-properties-for-the-kafka-servers"></a>5.2. Configure the file server.properties for the Kafka servers</h3>
+<div class="listingblock">
+<div class="content">
+<pre>$ (cd config; for n in 2 3
+do
+	patch server.properties \
+		../../patches/lab3/server.$n.properties.diff \
+		-o server.$n.properties
+	vim -d server.properties server.$n.properties
+done)</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="start-the-kafka-cluster-1-zookeeper-3-brokers"><a class="anchor" href="#start-the-kafka-cluster-1-zookeeper-3-brokers"></a>5.3. Start the Kafka cluster (1 ZooKeeper + 3 Brokers)</h3>
+<div class="listingblock">
+<div class="content">
+<pre>$ tmux new-session -s lab3 \
+	'bin/zookeeper-server-start.sh config/zookeeper.properties' \; \
+	split-pane 'sleep 2; bin/kafka-server-start.sh config/server.properties' \; \
+	split-pane 'sleep 2; bin/kafka-server-start.sh config/server.2.properties' \; \
+	split-pane 'sleep 2; bin/kafka-server-start.sh config/server.3.properties' \; \
+	select-layout even-vertical</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The sleep of 2 seconds for each kafka server is to wait for the
+ZooKeeper server to be started.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="create-a-topic-3"><a class="anchor" href="#create-a-topic-3"></a>5.4. Create a topic</h3>
+<div class="paragraph">
+<p>Create a new tmux window (<span class="keyseq"><kbd>Ctrl</kbd>+<kbd>b</kbd>+<kbd>c</kbd></span> on tmux) and create a topic:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ bin/kafka-topics.sh --create --topic my-topic \
+--zookeeper localhost:2181 \
+--replication-factor 3 --partitions 3</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See the topic details:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ bin/kafka-topics.sh --describe —topic my-topic \
+--zookeeper localhost:2181</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Expected output for the command above:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Topic: my-topic PartitionCount: 3       ReplicationFactor: 3    Configs:
+        Topic: my-topic Partition: 0    Leader: 1       Replicas: 1,2,0 Isr: 1,0,2
+        Topic: my-topic Partition: 1    Leader: 0       Replicas: 2,0,1 Isr: 0,1,2
+        Topic: my-topic Partition: 2    Leader: 0       Replicas: 0,1,2 Isr: 0,1,2</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you kill the third Kafka broker and repeat the command <code>describe</code>,
+you should notice the following output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Topic: my-topic PartitionCount: 3       ReplicationFactor: 3    Configs:
+        Topic: my-topic Partition: 0    Leader: 1       Replicas: 1,2,0 Isr: 1,0
+        Topic: my-topic Partition: 1    Leader: 0       Replicas: 2,0,1 Isr: 0,1
+        Topic: my-topic Partition: 2    Leader: 0       Replicas: 0,1,2 Isr: 0,1</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="run-built-in-kafka-producer-to-generate-random-test-messages"><a class="anchor" href="#run-built-in-kafka-producer-to-generate-random-test-messages"></a>5.5. Run built in Kafka producer to generate random test messages</h3>
+<div class="listingblock">
+<div class="content">
+<pre>$ bin/kafka-producer-perf-test.sh --topic my-topic \
+--num-records 50 --record-size 1 --throughput 10 \
+--producer-props \
+	bootstrap.servers=localhost:9092,localhost:9093,localhost:9094 \
+	key.serializer=org.apache.kafka.common.serialization.StringSerializer \
+	value.serializer=org.apache.kafka.common.serialization.StringSerializer</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="clean-up-2"><a class="anchor" href="#clean-up-2"></a>5.6. Clean Up</h3>
+<div class="paragraph">
+<p>Kill the ZooKeeper server and the Kafka brokers.
+After that, type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ rm -rf /tmp/kafka-logs* /tmp/zookeeper</pre>
+</div>
 </div>
 </div>
 </div>
