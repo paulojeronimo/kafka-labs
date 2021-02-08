@@ -27,9 +27,9 @@ lab3-dir() {
 	cd $KAFKA_DIR
 }
 
-configure-kafka-server() {
-	local server=$1
-	cp
+lab4-dir() {
+	kafka-labs
+	cd final/lab4
 }
 
 kafka-download() {(
