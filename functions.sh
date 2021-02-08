@@ -1,47 +1,47 @@
 #!/usr/bin/env bash
 cd "$(dirname "${BASH_SOURCE[0]}")"
-
-export SCALA_VER='2.13'
+export KAFKA_SCALA_VER='2.13'
 export KAFKA_VER='2.7.0'
-export KAFKA_DIR=kafka_$SCALA_VER-$KAFKA_VER
+export KAFKA_DIR=kafka_$KAFKA_SCALA_VER-$KAFKA_VER
 export KAFKA_TGZ=$KAFKA_DIR.tgz
 export KAFKA_URL=https://downloads.apache.org/kafka/$KAFKA_VER/$KAFKA_TGZ
-export KAFKA_TUT=$PWD
+export KAFKA_LABS=$PWD
+cd "$OLDPWD"
 
-kafka-tut() {
-	cd "$KAFKA_TUT"
+kafka-labs() {
+	cd "$KAFKA_LABS"
 }
 
 lab1-dir() {
-	kafka-tut
+	kafka-labs
 	cd $KAFKA_DIR
 }
 
 lab2-dir() {
-	kafka-tut
+	kafka-labs
 	cd final/quickstart-docker
 }
 
 kafka-download() {(
-	cd "$KAFKA_TUT"
+	cd "$KAFKA_LABS"
 	mkdir -p downloads && wget -c $KAFKA_URL -O downloads/$KAFKA_TGZ
 )}
 
 kafka-extract() {(
-	cd "$KAFKA_TUT"
+	cd "$KAFKA_LABS"
 	rm -rf $KAFKA_DIR
 	tar xvfz downloads/$KAFKA_TGZ
 )}
 
 zookeeper-server-start() {(
-	cd "$KAFKA_TUT/$KAFKA_DIR"
+	cd "$KAFKA_LABS/$KAFKA_DIR"
 	bin/zookeeper-server-start.sh config/zookeeper.properties
 )}
 
-kafka-server-start() {
-	cd "$KAFKA_TUT/$KAFKA_DIR"
+kafka-server-start() {(
+	cd "$KAFKA_LABS/$KAFKA_DIR"
 	bin/kafka-server-start.sh config/server.properties
-}
+)}
 
 which wget &> /dev/null || {
 	echo "Install wget!"
@@ -61,10 +61,9 @@ case "$OSTYPE" in
     function grep { ggrep "$@"; }
 esac
 type jdk &> /dev/null && jdk 1.8
-kafka-tut
 profile=~/.bash_profile
 [[ $OSTYPE =~ ^linux ]] && profile=~/.bashrc
-functions_sh=$KAFKA_TUT/functions.sh
+functions_sh=$KAFKA_LABS/functions.sh
 if ! [ -f $profile ] || ! grep -q "^source \"$functions_sh\"$" $profile; then
   echo "source \"$functions_sh\"" >> $profile
   echo "'source \"$functions_sh\"' added to $profile"

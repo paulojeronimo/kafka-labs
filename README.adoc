@@ -1,1 +1,1 @@
-https://paulojeronimo.com/kafka-tutorial
+https://paulojeronimo.com/kafka-labs
