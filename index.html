@@ -444,12 +444,22 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="details">
 <span id="author" class="author">Paulo Jerônimo</span><br>
 <span id="email" class="email"><a href="mailto:pj@paulojeronimo.com">pj@paulojeronimo.com</a></span><br>
-<span id="revdate">2021-02-12 07:29:28 -0300</span>
+<span id="revdate">2021-02-12 16:36:39 -0300</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#introduction">1. Introduction</a></li>
+<li><a href="#introduction">1. Introduction</a>
+<ul class="sectlevel2">
+<li><a href="#environment">1.1. Environment</a>
+<ul class="sectlevel3">
+<li><a href="#on-macos">1.1.1. On macOS</a></li>
+<li><a href="#on-linux">1.1.2. On Linux</a></li>
+</ul>
+</li>
+<li><a href="#labs">1.2. Labs</a></li>
+</ul>
+</li>
 <li><a href="#labs-download-and-installation">2. Labs download and installation</a></li>
 <li><a href="#lab1">3. Lab1: Quickstart (using a JVM)</a>
 <ul class="sectlevel2">
@@ -523,11 +533,44 @@ some tutorials that I read on the Internet (I left the references
 available).</p>
 </div>
 <div class="paragraph">
-<p>When I develop my labs, I usually add <a href="https://github.com/paulojeronimo/kafka-labs/blob/main/functions.sh" target="_blank" rel="noopener">some
-functions written in Bash</a> to make them more fluent in its execution
-through a command line (inside a <a href="https://github.com/tmux/tmux/wiki" target="_blank" rel="noopener">tmux</a> session) on a macOS or Linux
-environment.</p>
+<p>When I develop <a href="#labs">my labs</a>, I usually add
+<a href="https://github.com/paulojeronimo/kafka-labs/blob/main/functions.sh" target="_blank" rel="noopener">some functions written in Bash</a> to make them
+more fluent in its execution through a command line (inside a <a href="https://github.com/tmux/tmux/wiki" target="_blank" rel="noopener">tmux</a>
+session) on a <a href="#environment">macOS (or Linux environment)</a>.</p>
 </div>
+<div class="sect2">
+<h3 id="environment"><a class="anchor" href="#environment"></a>1.1. Environment</h3>
+<div class="paragraph">
+<p>The available <a href="#labs">Labs</a> were developed using the following tools (and
+versions):</p>
+</div>
+<div class="sect3">
+<h4 id="on-macos"><a class="anchor" href="#on-macos"></a>1.1.1. On macOS</h4>
+<div class="listingblock">
+<div class="content">
+<pre>$ # macOS version:
+$ sw_vers
+ProductName:	Mac OS X
+ProductVersion:	10.15.7
+BuildVersion:	19H2</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ echo $BASH_VERSION
+5.1.4(1)-release</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="on-linux"><a class="anchor" href="#on-linux"></a>1.1.2. On Linux</h4>
+<div class="paragraph">
+<p>TODO</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="labs"><a class="anchor" href="#labs"></a>1.2. Labs</h3>
 <div class="paragraph">
 <p>Currently, these are the labs that I developed:</p>
 </div>
@@ -555,6 +598,7 @@ environment.</p>
 <p><a href="#lab7">Lab7: SASL Authentication - Kerberos GSSAPI</a>.</p>
 </li>
 </ol>
+</div>
 </div>
 </div>
 </div>
