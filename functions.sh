@@ -17,6 +17,35 @@ lab1-dir() {
 	cd $KAFKA_DIR
 }
 
+lab1-setup() {
+	kafka-labs && kafka-download && kafka-extract
+}
+
+lab1-start() {(
+	lab1-dir
+	echo "Starting ZooKeeper ..."
+	tmux -2 new -d -s lab1 -n 'Servers' \
+		'bin/zookeeper-server-start.sh config/zookeeper.properties'
+	sleep 2
+	echo "Starting Kafka ..."
+	tmux splitw -v \
+		'bin/kafka-server-start.sh config/server.properties'
+	sleep 3
+	echo "Creating topic (quickstart-events) ..."
+	bin/kafka-topics.sh --create --topic quickstart-events --bootstrap-server localhost:9092
+	echo "Starting Consumer and Producer (you will be redirected to their window) ..."
+	tmux neww -t lab1:1 -n 'Consumer/Producer' \
+		'bin/kafka-console-consumer.sh --topic quickstart-events --bootstrap-server localhost:9092'
+	tmux splitw -v \
+		'bin/kafka-console-producer.sh --topic quickstart-events --bootstrap-server localhost:9092'
+	sleep 1
+	tmux attach
+)}
+
+lab1-cleanup() {
+	rm -rf /tmp/kafka-logs /tmp/zookeeper
+}
+
 lab2-dir() {
 	kafka-labs
 	cd final/lab2
@@ -41,16 +70,6 @@ kafka-extract() {(
 	cd "$KAFKA_LABS"
 	rm -rf $KAFKA_DIR
 	tar xvfz downloads/$KAFKA_TGZ
-)}
-
-zookeeper-server-start() {(
-	cd "$KAFKA_LABS/$KAFKA_DIR"
-	bin/zookeeper-server-start.sh config/zookeeper.properties
-)}
-
-kafka-server-start() {(
-	cd "$KAFKA_LABS/$KAFKA_DIR"
-	bin/kafka-server-start.sh config/server.properties
 )}
 
 which wget &> /dev/null || {
