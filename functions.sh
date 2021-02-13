@@ -12,9 +12,48 @@ kafka-labs() {
 	cd "$KAFKA_LABS"
 }
 
+kafka-dir() {
+	kafka-labs && cd $KAFKA_DIR
+}
+
+kafka-download() {(
+	cd "$KAFKA_LABS"
+	mkdir -p downloads && wget -c $KAFKA_URL -O downloads/$KAFKA_TGZ
+)}
+
+kafka-extract() {(
+	cd "$KAFKA_LABS"
+	rm -rf $KAFKA_DIR
+	tar xvfz downloads/$KAFKA_TGZ
+)}
+
+
+start-servers() {(
+	local lab=$1
+	kafka-dir
+	echo "Starting ZooKeeper ..."
+	tmux -2 new -d -s $lab -n 'Servers' \
+		'bin/zookeeper-server-start.sh config/zookeeper.properties'
+	sleep 2
+	echo "Starting Kafka ..."
+	tmux splitw -v \
+		'bin/kafka-server-start.sh config/server.properties'
+)}
+
+start-consumer-producer() {(
+	local lab=$1
+	kafka-dir
+	echo "Creating topic (quickstart-events) ..."
+	bin/kafka-topics.sh --create --topic quickstart-events --bootstrap-server localhost:9092
+	echo "Starting Consumer and Producer (you will be redirected to their window) ..."
+	tmux neww -t $lab:1 -n 'Consumer/Producer' \
+		'bin/kafka-console-consumer.sh --topic quickstart-events --bootstrap-server localhost:9092'
+	tmux splitw -v \
+		'bin/kafka-console-producer.sh --topic quickstart-events --bootstrap-server localhost:9092'
+)}
+
 lab1-dir() {
-	kafka-labs
-	cd $KAFKA_DIR
+	kafka-dir
 }
 
 lab1-setup() {
@@ -22,22 +61,9 @@ lab1-setup() {
 }
 
 lab1-start() {(
-	lab1-dir
-	echo "Starting ZooKeeper ..."
-	tmux -2 new -d -s lab1 -n 'Servers' \
-		'bin/zookeeper-server-start.sh config/zookeeper.properties'
-	sleep 2
-	echo "Starting Kafka ..."
-	tmux splitw -v \
-		'bin/kafka-server-start.sh config/server.properties'
+	start-servers lab1
 	sleep 3
-	echo "Creating topic (quickstart-events) ..."
-	bin/kafka-topics.sh --create --topic quickstart-events --bootstrap-server localhost:9092
-	echo "Starting Consumer and Producer (you will be redirected to their window) ..."
-	tmux neww -t lab1:1 -n 'Consumer/Producer' \
-		'bin/kafka-console-consumer.sh --topic quickstart-events --bootstrap-server localhost:9092'
-	tmux splitw -v \
-		'bin/kafka-console-producer.sh --topic quickstart-events --bootstrap-server localhost:9092'
+	start-consumer-producer lab1
 	sleep 1
 	tmux attach
 )}
@@ -60,17 +86,6 @@ lab4-dir() {
 	kafka-labs
 	cd final/lab4
 }
-
-kafka-download() {(
-	cd "$KAFKA_LABS"
-	mkdir -p downloads && wget -c $KAFKA_URL -O downloads/$KAFKA_TGZ
-)}
-
-kafka-extract() {(
-	cd "$KAFKA_LABS"
-	rm -rf $KAFKA_DIR
-	tar xvfz downloads/$KAFKA_TGZ
-)}
 
 which wget &> /dev/null || {
 	echo "Install wget!"
