@@ -444,17 +444,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="details">
 <span id="author" class="author">Paulo Jerônimo</span><br>
 <span id="email" class="email"><a href="mailto:pj@paulojeronimo.com">pj@paulojeronimo.com</a></span><br>
-<span id="revdate">2021-02-12 17:37:31 -0300</span>
+<span id="revdate">2021-02-13 10:44:41 -0300</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#introduction">1. Introduction</a>
 <ul class="sectlevel2">
-<li><a href="#environment">1.1. Environment</a>
+<li><a href="#prerequisites">1.1. Prerequisites</a>
 <ul class="sectlevel3">
 <li><a href="#on-macos">1.1.1. On macOS</a></li>
 <li><a href="#on-linux">1.1.2. On Linux</a></li>
+<li><a href="#notes">1.1.3. Notes</a></li>
 </ul>
 </li>
 <li><a href="#labs">1.2. Labs</a></li>
@@ -463,54 +464,59 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#labs-download-and-installation">2. Labs download and installation</a></li>
 <li><a href="#lab1">3. Lab1: Quickstart (using a JVM)</a>
 <ul class="sectlevel2">
-<li><a href="#prerequisites">3.1. Prerequisites</a></li>
-<li><a href="#download-extract-kafka-and-change-to-its-directory">3.2. Download, extract Kafka, and change to its directory</a></li>
-<li><a href="#start-tmux">3.3. Start tmux</a></li>
-<li><a href="#start-a-zookeeper-server">3.4. Start a ZooKeeper server</a></li>
-<li><a href="#start-a-kafka-server">3.5. Start a Kafka server</a></li>
-<li><a href="#create-a-topic">3.6. Create a topic</a></li>
-<li><a href="#start-a-producer">3.7. Start a producer</a></li>
-<li><a href="#start-a-consumer">3.8. Start a consumer</a></li>
-<li><a href="#terminate-the-kafka-environment">3.9. Terminate the Kafka environment</a></li>
-<li><a href="#references">3.10. References</a></li>
+<li><a href="#main-goals">3.1. Main goals</a></li>
+<li><a href="#prerequisites-2">3.2. Prerequisites</a></li>
+<li><a href="#downloading-and-extracting-kafka">3.3. Downloading and extracting Kafka</a></li>
+<li><a href="#starting-tmux">3.4. Starting tmux</a></li>
+<li><a href="#starting-the-zookeeper-server">3.5. Starting the ZooKeeper server</a></li>
+<li><a href="#starting-the-kafka-server">3.6. Starting the Kafka server</a></li>
+<li><a href="#creating-a-topic">3.7. Creating a topic</a></li>
+<li><a href="#starting-a-producer">3.8. Starting a producer</a></li>
+<li><a href="#starting-a-consumer">3.9. Starting a consumer</a></li>
+<li><a href="#doing-the-cleanup">3.10. Doing the cleanup</a></li>
+<li><a href="#reviewing">3.11. Reviewing</a></li>
+<li><a href="#references">3.12. References</a></li>
 </ul>
 </li>
 <li><a href="#lab2">4. Lab2: Quickstart (using Docker)</a>
 <ul class="sectlevel2">
-<li><a href="#prerequisites-2">4.1. Prerequisites</a></li>
-<li><a href="#launch-confluent-platform">4.2. Launch Confluent Platform</a></li>
-<li><a href="#create-a-topic-2">4.3. Create a topic</a></li>
-<li><a href="#start-a-console-consumer">4.4. Start a console consumer</a></li>
-<li><a href="#produce-your-first-records">4.5. Produce your first records</a></li>
-<li><a href="#see-the-kafka-environment-through-your-web-browser">4.6. See the Kafka environment through your web browser</a></li>
-<li><a href="#start-a-new-consumer-to-read-all-records">4.7. Start a new consumer to read all records</a></li>
-<li><a href="#produce-and-consume-records-with-full-key-value-pairs">4.8. Produce and consume records with full key-value pairs</a></li>
-<li><a href="#clean-up">4.9. Clean Up</a></li>
-<li><a href="#references-2">4.10. References</a></li>
+<li><a href="#main-goals-2">4.1. Main goals</a></li>
+<li><a href="#prerequisites-3">4.2. Prerequisites</a></li>
+<li><a href="#launching-confluent-platform">4.3. Launching Confluent Platform</a></li>
+<li><a href="#creating-a-topic-2">4.4. Creating a topic</a></li>
+<li><a href="#starting-a-console-consumer">4.5. Starting a console consumer</a></li>
+<li><a href="#producing-your-first-records">4.6. Producing your first records</a></li>
+<li><a href="#seeing-the-kafka-environment-through-your-web-browser">4.7. Seeing the Kafka environment through your web browser</a></li>
+<li><a href="#starting-a-new-consumer-to-read-all-records">4.8. Starting a new consumer to read all records</a></li>
+<li><a href="#producing-and-consuming-records-with-full-key-value-pairs">4.9. Producing and consuming records with full key-value pairs</a></li>
+<li><a href="#doing-the-cleanup-2">4.10. Doing the cleanup</a></li>
+<li><a href="#references-2">4.11. References</a></li>
 </ul>
 </li>
 <li><a href="#lab3">5. Lab3: Starting Kafka with 3 Brokers and 3 Partitions (using a JVM)</a>
 <ul class="sectlevel2">
-<li><a href="#lab3-1">5.1. Download, extract Kafka, and change to its directory</a></li>
-<li><a href="#lab3-2">5.2. Configure the file server.properties for the Kafka servers</a></li>
-<li><a href="#lab3-3">5.3. Start the Kafka cluster (1 ZooKeeper + 3 Brokers)</a></li>
-<li><a href="#create-a-topic-3">5.4. Create a topic</a></li>
-<li><a href="#run-built-in-kafka-producer-to-generate-random-test-messages">5.5. Run built in Kafka producer to generate random test messages</a></li>
-<li><a href="#lab3-clean-up">5.6. Clean Up</a></li>
+<li><a href="#main-goals-3">5.1. Main goals</a></li>
+<li><a href="#lab3-1">5.2. Doing a fresh Kafka installation</a></li>
+<li><a href="#lab3-2">5.3. Configuring the file server.properties for the Kafka servers</a></li>
+<li><a href="#lab3-3">5.4. Starting the Kafka cluster (1 ZooKeeper + 3 Brokers)</a></li>
+<li><a href="#creating-a-topic-3">5.5. Creating a topic</a></li>
+<li><a href="#running-a-built-in-kafka-producer-to-generate-random-test-messages">5.6. Running a built in Kafka producer to generate random test messages</a></li>
+<li><a href="#lab3-cleanup">5.7. Doing the cleanup</a></li>
 </ul>
 </li>
 <li><a href="#lab4">6. Lab4: Creating Kafka producer/consumer applications in Java</a>
 <ul class="sectlevel2">
-<li><a href="#execution">6.1. Execution</a>
+<li><a href="#main-goals-4">6.1. Main goals</a></li>
+<li><a href="#execution">6.2. Execution</a>
 <ul class="sectlevel3">
-<li><a href="#prepare-the-environment">6.1.1. Prepare the environment</a></li>
-<li><a href="#create-a-topic-4">6.1.2. Create a topic</a></li>
-<li><a href="#run-the-consumer-application">6.1.3. Run the consumer application</a></li>
-<li><a href="#running-the-producer-application">6.1.4. Running the producer application</a></li>
+<li><a href="#preparing-the-environment">6.2.1. Preparing the environment</a></li>
+<li><a href="#creating-a-topic-4">6.2.2. Creating a topic</a></li>
+<li><a href="#running-the-consumer-application">6.2.3. Running the consumer application</a></li>
+<li><a href="#running-the-producer-application">6.2.4. Running the producer application</a></li>
 </ul>
 </li>
-<li><a href="#tutorial">6.2. Tutorial</a></li>
-<li><a href="#clean-up-2">6.3. Clean Up</a></li>
+<li><a href="#tutorial">6.3. Tutorial</a></li>
+<li><a href="#doing-the-cleanup-3">6.4. Doing the cleanup</a></li>
 </ul>
 </li>
 <li><a href="#lab5">7. Lab5: SSL Security (part 1 - SSL Encryption)</a>
@@ -520,6 +526,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#lab6">8. Lab6: SSL Security (part 2 - SSL Authentication)</a></li>
 <li><a href="#lab7">9. Lab7: SASL Authentication - Kerberos GSSAPI</a></li>
+<li><a href="#lab8">10. Lab8: Running Kafka on Kubernetes</a></li>
 </ul>
 </div>
 </div>
@@ -533,32 +540,37 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="introduction"><a class="anchor" href="#introduction"></a>1. Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This is my <a href="https://kafka.apache.org" target="_blank" rel="noopener">Kafka</a> labs which I developed by reading and modifying
-some tutorials that I read on the Internet (I left the references
-available).</p>
+<p>This document shows you some <a href="https://kafka.apache.org" target="_blank" rel="noopener">Kafka</a> labs which I made in my own
+environment (<a href="#on-macos">On macOS</a> or <a href="#on-linux">On Linux</a>) by following (and sometimes
+adapting) tutorials that I read on the Internet.
+I let the references available inside the labs in order to give you a
+chance to explore more.</p>
 </div>
 <div class="paragraph">
-<p>When I develop <a href="#labs">my labs</a>, I usually add
+<p>When I develop my <a href="#labs">Labs</a>, I usually add
 <a href="https://github.com/paulojeronimo/kafka-labs/blob/main/functions.sh" target="_blank" rel="noopener">some functions written in Bash</a> to make them
 more fluent in its execution through a command line (inside a <a href="https://github.com/tmux/tmux/wiki" target="_blank" rel="noopener">tmux</a>
-session) on a <a href="#environment">macOS (or Linux environment)</a>.</p>
+session) on my environment(s).
+By doing this I can repeat my steps in a more practical, quick, and
+effective way.</p>
 </div>
 <div class="sect2">
-<h3 id="environment"><a class="anchor" href="#environment"></a>1.1. Environment</h3>
-<div class="paragraph">
-<p>The available <a href="#labs">Labs</a> were developed using the following tools (and
-versions):</p>
-</div>
+<h3 id="prerequisites"><a class="anchor" href="#prerequisites"></a>1.1. Prerequisites</h3>
 <div class="sect3">
 <h4 id="on-macos"><a class="anchor" href="#on-macos"></a>1.1.1. On macOS</h4>
+<div class="paragraph">
+<p>Operating System (OS) version:</p>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre>$ # macOS version:
-$ sw_vers
+<pre>$ sw_vers
 ProductName:	Mac OS X
 ProductVersion:	10.15.7
 BuildVersion:	19H2</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Bash installed:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -566,11 +578,46 @@ BuildVersion:	19H2</pre>
 5.1.4(1)-release</pre>
 </div>
 </div>
+<div class="paragraph">
+<p>Git installed:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ git --version
+git version 2.30.1</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>GNU versions of sed and grep (you can use Homebrew to install it):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ gsed --version | head -1
+gsed (GNU sed) 4.8
+
+$ gsed --version | head -1
+gsed (GNU sed) 4.8</pre>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="on-linux"><a class="anchor" href="#on-linux"></a>1.1.2. On Linux</h4>
 <div class="paragraph">
 <p>TODO</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="notes"><a class="anchor" href="#notes"></a>1.1.3. Notes</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>I don&#8217;t use the Microsoft Windows operating systems and I can&#8217;t help
+you if you are using them to reproduce my <a href="#labs">Labs</a>.</p>
+</li>
+<li>
+<p>Some of these labs have specific prerequisites.</p>
+</li>
+</ol>
 </div>
 </div>
 </div>
@@ -602,6 +649,9 @@ BuildVersion:	19H2</pre>
 <li>
 <p><a href="#lab7">Lab7: SASL Authentication - Kerberos GSSAPI</a>.</p>
 </li>
+<li>
+<p><a href="#lab8">Lab8: Running Kafka on Kubernetes</a>.</p>
+</li>
 </ol>
 </div>
 <div style="page-break-after: always;"></div>
@@ -617,6 +667,23 @@ BuildVersion:	19H2</pre>
 $ cd `basename $_` &amp;&amp; source functions.sh</pre>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Maybe you have to install some specific software when trying to run the
+last command (<code>source funcions.sh</code>).
+Especially if you are running it <a href="#on-macos">On macOS</a> environment.
+So, pay attention to its output.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -624,7 +691,32 @@ $ cd `basename $_` &amp;&amp; source functions.sh</pre>
 <h2 id="lab1"><a class="anchor" href="#lab1"></a>3. Lab1: Quickstart (using a JVM)</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="prerequisites"><a class="anchor" href="#prerequisites"></a>3.1. Prerequisites</h3>
+<h3 id="main-goals"><a class="anchor" href="#main-goals"></a>3.1. Main goals</h3>
+<div class="paragraph">
+<p>Understand in practice &#8230;&#8203;</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The main components of a Kafka infrastructure.</p>
+</li>
+<li>
+<p>How to start/stop a simple Kafka infrastructure.</p>
+</li>
+<li>
+<p>How to create a topic.</p>
+</li>
+<li>
+<p>How to do a cleanup (useful in development environments, ie).</p>
+</li>
+<li>
+<p>How to quickly start an environment to test Kafka (using tmux).</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="prerequisites-2"><a class="anchor" href="#prerequisites-2"></a>3.2. Prerequisites</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -632,9 +724,9 @@ $ cd `basename $_` &amp;&amp; source functions.sh</pre>
 <div class="listingblock">
 <div class="content">
 <pre>$ java -version
-openjdk version "1.8.0_275"
-OpenJDK Runtime Environment (AdoptOpenJDK)(build 1.8.0_275-b01)
-OpenJDK 64-Bit Server VM (AdoptOpenJDK)(build 25.275-b01, mixed mode)</pre>
+openjdk version "1.8.0_282"
+OpenJDK Runtime Environment (AdoptOpenJDK)(build 1.8.0_282-b08)
+OpenJDK 64-Bit Server VM (AdoptOpenJDK)(build 25.282-b08, mixed mode)</pre>
 </div>
 </div>
 </li>
@@ -642,7 +734,10 @@ OpenJDK 64-Bit Server VM (AdoptOpenJDK)(build 25.275-b01, mixed mode)</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="download-extract-kafka-and-change-to-its-directory"><a class="anchor" href="#download-extract-kafka-and-change-to-its-directory"></a>3.2. Download, extract Kafka, and change to its directory</h3>
+<h3 id="downloading-and-extracting-kafka"><a class="anchor" href="#downloading-and-extracting-kafka"></a>3.3. Downloading and extracting Kafka</h3>
+<div class="paragraph">
+<p>Download, extract and change to the Kafka directory:</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre>$ kafka-labs &amp;&amp; kafka-download &amp;&amp; kafka-extract &amp;&amp; lab1-dir</pre>
@@ -662,7 +757,7 @@ These are functions that I created in <a href="https://github.com/paulojeronimo/
 </div>
 </div>
 <div class="sect2">
-<h3 id="start-tmux"><a class="anchor" href="#start-tmux"></a>3.3. Start tmux</h3>
+<h3 id="starting-tmux"><a class="anchor" href="#starting-tmux"></a>3.4. Starting tmux</h3>
 <div class="paragraph">
 <p>Start <a href="https://github.com/tmux/tmux/wiki" target="_blank" rel="noopener">tmux</a>:</p>
 </div>
@@ -679,38 +774,24 @@ These are functions that I created in <a href="https://github.com/paulojeronimo/
 </td>
 <td class="content">
 Subsequent terminal creations through tmux will be set the current
-directory to where the session where started.
-In this case, this is the directory where the Kafka package where
-extracted.
+directory to where the session where started
+(in this case, the directory where the Kafka package were extracted).
 </td>
 </tr>
 </table>
 </div>
 </div>
 <div class="sect2">
-<h3 id="start-a-zookeeper-server"><a class="anchor" href="#start-a-zookeeper-server"></a>3.4. Start a ZooKeeper server</h3>
+<h3 id="starting-the-zookeeper-server"><a class="anchor" href="#starting-the-zookeeper-server"></a>3.5. Starting the ZooKeeper server</h3>
 <div class="listingblock">
 <div class="content">
 <pre>$ # terminal 1
 $ bin/zookeeper-server-start.sh config/zookeeper.properties</pre>
 </div>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The command above can be also called through the function
-<code>zookeeper-server-start</code>.
-</td>
-</tr>
-</table>
-</div>
 </div>
 <div class="sect2">
-<h3 id="start-a-kafka-server"><a class="anchor" href="#start-a-kafka-server"></a>3.5. Start a Kafka server</h3>
+<h3 id="starting-the-kafka-server"><a class="anchor" href="#starting-the-kafka-server"></a>3.6. Starting the Kafka server</h3>
 <div class="paragraph">
 <p>Open another terminal (<code>terminal 2</code> - <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>b</kbd>+<kbd>"</kbd></span> on tmux) and start
 a broker instance:</p>
@@ -721,24 +802,9 @@ a broker instance:</p>
 $ bin/kafka-server-start.sh config/server.properties</pre>
 </div>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>The command above can be also called through the function
-<code>kafka-server-start</code>.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
 </div>
 <div class="sect2">
-<h3 id="create-a-topic"><a class="anchor" href="#create-a-topic"></a>3.6. Create a topic</h3>
+<h3 id="creating-a-topic"><a class="anchor" href="#creating-a-topic"></a>3.7. Creating a topic</h3>
 <div class="paragraph">
 <p>Open another terminal (<code>terminal 3</code> - <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>b</kbd>+<kbd>c</kbd></span> on tmux) and create
 a topic:</p>
@@ -762,7 +828,7 @@ $ bin/kafka-topics.sh \
 </div>
 </div>
 <div class="sect2">
-<h3 id="start-a-producer"><a class="anchor" href="#start-a-producer"></a>3.7. Start a producer</h3>
+<h3 id="starting-a-producer"><a class="anchor" href="#starting-a-producer"></a>3.8. Starting a producer</h3>
 <div class="listingblock">
 <div class="content">
 <pre>$ # terminal 3
@@ -782,7 +848,7 @@ $ bin/kafka-console-producer.sh \
 </div>
 </div>
 <div class="sect2">
-<h3 id="start-a-consumer"><a class="anchor" href="#start-a-consumer"></a>3.8. Start a consumer</h3>
+<h3 id="starting-a-consumer"><a class="anchor" href="#starting-a-consumer"></a>3.9. Starting a consumer</h3>
 <div class="paragraph">
 <p>Open another terminal (<code>terminal 4</code> - <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>b</kbd>+<kbd>"</kbd></span> on tmux) and start
 a consumer:</p>
@@ -806,7 +872,7 @@ This is my second event</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="terminate-the-kafka-environment"><a class="anchor" href="#terminate-the-kafka-environment"></a>3.9. Terminate the Kafka environment</h3>
+<h3 id="doing-the-cleanup"><a class="anchor" href="#doing-the-cleanup"></a>3.10. Doing the cleanup</h3>
 <div class="paragraph">
 <p>Type <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>C</kbd></span> then <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>D</kbd></span> on terminals 4, 3, 2 (in this
 order). Type <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>C</kbd></span> on terminal 1 to terminate the ZooKeeper
@@ -821,9 +887,35 @@ instance.</p>
 $ rm -rf /tmp/kafka-logs /tmp/zookeeper</pre>
 </div>
 </div>
+<div class="paragraph">
+<p>Finally, finish the tmux session (lab1) by typing <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>D</kbd></span>.</p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="references"><a class="anchor" href="#references"></a>3.10. References</h3>
+<h3 id="reviewing"><a class="anchor" href="#reviewing"></a>3.11. Reviewing</h3>
+<div class="paragraph">
+<p>Start the lab using one single line:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ lab1-start</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Stop all the opened windows manually (using <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>C</kbd></span> and
+<span class="keyseq"><kbd>Ctrl</kbd>+<kbd>D</kbd></span>).</p>
+</div>
+<div class="paragraph">
+<p>Delete all the data:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ lab1-cleanup</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="references"><a class="anchor" href="#references"></a>3.12. References</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -839,7 +931,26 @@ $ rm -rf /tmp/kafka-logs /tmp/zookeeper</pre>
 <h2 id="lab2"><a class="anchor" href="#lab2"></a>4. Lab2: Quickstart (using Docker)</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="prerequisites-2"><a class="anchor" href="#prerequisites-2"></a>4.1. Prerequisites</h3>
+<h3 id="main-goals-2"><a class="anchor" href="#main-goals-2"></a>4.1. Main goals</h3>
+<div class="paragraph">
+<p>Understand in practice &#8230;&#8203;</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>How to start/stop Kafka using Docker Compose.</p>
+</li>
+<li>
+<p>How to see their components through a browser.</p>
+</li>
+<li>
+<p>How to produce and consume records with key-value pairs.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="prerequisites-3"><a class="anchor" href="#prerequisites-3"></a>4.2. Prerequisites</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -847,7 +958,7 @@ $ rm -rf /tmp/kafka-logs /tmp/zookeeper</pre>
 <div class="listingblock">
 <div class="content">
 <pre>$ docker -v
-Docker version 20.10.0, build 7287ab3</pre>
+Docker version 20.10.2, build 2291f61</pre>
 </div>
 </div>
 </li>
@@ -864,7 +975,7 @@ docker-compose version 1.27.4, build 40524192</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="launch-confluent-platform"><a class="anchor" href="#launch-confluent-platform"></a>4.2. Launch Confluent Platform</h3>
+<h3 id="launching-confluent-platform"><a class="anchor" href="#launching-confluent-platform"></a>4.3. Launching Confluent Platform</h3>
 <div class="listingblock">
 <div class="content">
 <pre>$ lab2-dir &amp;&amp; tmux new -s lab2</pre>
@@ -884,7 +995,7 @@ $ docker-compose logs -f</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="create-a-topic-2"><a class="anchor" href="#create-a-topic-2"></a>4.3. Create a topic</h3>
+<h3 id="creating-a-topic-2"><a class="anchor" href="#creating-a-topic-2"></a>4.4. Creating a topic</h3>
 <div class="paragraph">
 <p>Start a new terminal (<code>terminal 2</code> - <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>b</kbd>+<kbd>c</kbd></span> on tmux) and type:</p>
 </div>
@@ -917,7 +1028,7 @@ $ docker-compose exec kafka kafka-topics \
 </div>
 </div>
 <div class="sect2">
-<h3 id="start-a-console-consumer"><a class="anchor" href="#start-a-console-consumer"></a>4.4. Start a console consumer</h3>
+<h3 id="starting-a-console-consumer"><a class="anchor" href="#starting-a-console-consumer"></a>4.5. Starting a console consumer</h3>
 <div class="listingblock">
 <div class="content">
 <pre>$ # terminal 2
@@ -928,7 +1039,7 @@ $ kafka-console-consumer \
 </div>
 </div>
 <div class="sect2">
-<h3 id="produce-your-first-records"><a class="anchor" href="#produce-your-first-records"></a>4.5. Produce your first records</h3>
+<h3 id="producing-your-first-records"><a class="anchor" href="#producing-your-first-records"></a>4.6. Producing your first records</h3>
 <div class="paragraph">
 <p>Start a new terminal (<code>terminal 3</code> - <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>b</kbd>+<kbd>"</kbd></span> on tmux) and type:</p>
 </div>
@@ -953,7 +1064,7 @@ $ kafka-console-producer \
 </div>
 </div>
 <div class="sect2">
-<h3 id="see-the-kafka-environment-through-your-web-browser"><a class="anchor" href="#see-the-kafka-environment-through-your-web-browser"></a>4.6. See the Kafka environment through your web browser</h3>
+<h3 id="seeing-the-kafka-environment-through-your-web-browser"><a class="anchor" href="#seeing-the-kafka-environment-through-your-web-browser"></a>4.7. Seeing the Kafka environment through your web browser</h3>
 <div class="paragraph">
 <p>Open Confluent Control Center at <a href="http://localhost:9021" class="bare">http://localhost:9021</a>.</p>
 </div>
@@ -964,7 +1075,7 @@ the Control Center.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="start-a-new-consumer-to-read-all-records"><a class="anchor" href="#start-a-new-consumer-to-read-all-records"></a>4.7. Start a new consumer to read all records</h3>
+<h3 id="starting-a-new-consumer-to-read-all-records"><a class="anchor" href="#starting-a-new-consumer-to-read-all-records"></a>4.8. Starting a new consumer to read all records</h3>
 <div class="paragraph">
 <p>Start a new terminal (<code>terminal 4</code> - <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>b</kbd>+<kbd>"</kbd></span> on tmux) and type:</p>
 </div>
@@ -978,7 +1089,7 @@ $ kafka-console-consumer \
 </div>
 </div>
 <div class="sect2">
-<h3 id="produce-and-consume-records-with-full-key-value-pairs"><a class="anchor" href="#produce-and-consume-records-with-full-key-value-pairs"></a>4.8. Produce and consume records with full key-value pairs</h3>
+<h3 id="producing-and-consuming-records-with-full-key-value-pairs"><a class="anchor" href="#producing-and-consuming-records-with-full-key-value-pairs"></a>4.9. Producing and consuming records with full key-value pairs</h3>
 <div class="paragraph">
 <p>On <code>terminal 4</code>, finish the current consumer:</p>
 </div>
@@ -1037,7 +1148,7 @@ Center.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="clean-up"><a class="anchor" href="#clean-up"></a>4.9. Clean Up</h3>
+<h3 id="doing-the-cleanup-2"><a class="anchor" href="#doing-the-cleanup-2"></a>4.10. Doing the cleanup</h3>
 <div class="listingblock">
 <div class="content">
 <pre>$ # terminal 1
@@ -1045,9 +1156,12 @@ $ # Type <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>C</kbd></span> to stop "docke
 $ docker-compose down -v</pre>
 </div>
 </div>
+<div class="paragraph">
+<p>Also, terminate the tmux session (lab2) by typing <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>D</kbd></span>.</p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="references-2"><a class="anchor" href="#references-2"></a>4.10. References</h3>
+<h3 id="references-2"><a class="anchor" href="#references-2"></a>4.11. References</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -1063,7 +1177,26 @@ $ docker-compose down -v</pre>
 <h2 id="lab3"><a class="anchor" href="#lab3"></a>5. Lab3: Starting Kafka with 3 Brokers and 3 Partitions (using a JVM)</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="lab3-1"><a class="anchor" href="#lab3-1"></a>5.1. Download, extract Kafka, and change to its directory</h3>
+<h3 id="main-goals-3"><a class="anchor" href="#main-goals-3"></a>5.1. Main goals</h3>
+<div class="paragraph">
+<p>Understand in practice &#8230;&#8203;</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>How to configure, start and stop a Kafka cluster.</p>
+</li>
+<li>
+<p>How to see their components through a browser.</p>
+</li>
+<li>
+<p>What are partitions and their relation with topics.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="lab3-1"><a class="anchor" href="#lab3-1"></a>5.2. Doing a fresh Kafka installation</h3>
 <div class="listingblock">
 <div class="content">
 <pre>$ kafka-labs &amp;&amp; kafka-download &amp;&amp; kafka-extract &amp;&amp; lab3-dir</pre>
@@ -1071,7 +1204,7 @@ $ docker-compose down -v</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="lab3-2"><a class="anchor" href="#lab3-2"></a>5.2. Configure the file server.properties for the Kafka servers</h3>
+<h3 id="lab3-2"><a class="anchor" href="#lab3-2"></a>5.3. Configuring the file server.properties for the Kafka servers</h3>
 <div class="listingblock">
 <div class="content">
 <pre>$ (cd config; for n in 2 3
@@ -1085,7 +1218,7 @@ done)</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="lab3-3"><a class="anchor" href="#lab3-3"></a>5.3. Start the Kafka cluster (1 ZooKeeper + 3 Brokers)</h3>
+<h3 id="lab3-3"><a class="anchor" href="#lab3-3"></a>5.4. Starting the Kafka cluster (1 ZooKeeper + 3 Brokers)</h3>
 <div class="listingblock">
 <div class="content">
 <pre>$ tmux new-session -s lab3 \
@@ -1111,7 +1244,7 @@ ZooKeeper server to be started.
 </div>
 </div>
 <div class="sect2">
-<h3 id="create-a-topic-3"><a class="anchor" href="#create-a-topic-3"></a>5.4. Create a topic</h3>
+<h3 id="creating-a-topic-3"><a class="anchor" href="#creating-a-topic-3"></a>5.5. Creating a topic</h3>
 <div class="paragraph">
 <p>Create a new tmux window (<span class="keyseq"><kbd>Ctrl</kbd>+<kbd>b</kbd>+<kbd>c</kbd></span> on tmux) and create a topic:</p>
 </div>
@@ -1125,7 +1258,7 @@ ZooKeeper server to be started.
 <div class="paragraph">
 <p>See the topic details:</p>
 </div>
-<div class="listingblock">
+<div id="lab3-kafka-topics-describe" class="listingblock">
 <div class="content">
 <pre>$ bin/kafka-topics.sh --describe —topic my-topic \
 --zookeeper localhost:2181</pre>
@@ -1143,8 +1276,34 @@ ZooKeeper server to be started.
 </div>
 </div>
 <div class="paragraph">
-<p>If you kill the third Kafka broker and repeat the command <code>describe</code>,
-you should notice the following output:</p>
+<p>Kill the third Kafka broker.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">To do this &#8230;&#8203;</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Type <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>b</kbd>+<kbd>n</kbd></span> and <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>C</kbd></span>.</p>
+</li>
+<li>
+<p>Type <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>b</kbd>+<kbd>n</kbd></span> to go back to the previous window.</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Repeat the command <code>describe</code> (using the up arrow key or by typing <code>!!</code>
+at the command prompt).
+You should now notice the following output:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1156,7 +1315,7 @@ you should notice the following output:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="run-built-in-kafka-producer-to-generate-random-test-messages"><a class="anchor" href="#run-built-in-kafka-producer-to-generate-random-test-messages"></a>5.5. Run built in Kafka producer to generate random test messages</h3>
+<h3 id="running-a-built-in-kafka-producer-to-generate-random-test-messages"><a class="anchor" href="#running-a-built-in-kafka-producer-to-generate-random-test-messages"></a>5.6. Running a built in Kafka producer to generate random test messages</h3>
 <div class="listingblock">
 <div class="content">
 <pre>$ bin/kafka-producer-perf-test.sh --topic my-topic \
@@ -1167,12 +1326,26 @@ you should notice the following output:</p>
 	value.serializer=org.apache.kafka.common.serialization.StringSerializer</pre>
 </div>
 </div>
+<div class="paragraph">
+<p>Sample output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>50 records sent, 10.040161 records/sec (0.00 MB/sec), 15.00 ms avg latency, 398.00 ms max latency, 3 ms 50th, 48 ms 95th, 398 ms 99th, 398 ms 99.9th.</pre>
+</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="lab3-clean-up"><a class="anchor" href="#lab3-clean-up"></a>5.6. Clean Up</h3>
+<h3 id="lab3-cleanup"><a class="anchor" href="#lab3-cleanup"></a>5.7. Doing the cleanup</h3>
 <div class="paragraph">
-<p>Kill the ZooKeeper server and the Kafka brokers.
-After that, type:</p>
+<p>Kill the Kafka server brokers (by typing <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>C</kbd></span> on their panes)
+and lastly kill the ZooKeeper server.</p>
+</div>
+<div class="paragraph">
+<p>Also, finish the tmux session (lab3) by typing <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>D</kbd></span>.</p>
+</div>
+<div class="paragraph">
+<p>After that, type:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1187,51 +1360,76 @@ After that, type:</p>
 <h2 id="lab4"><a class="anchor" href="#lab4"></a>6. Lab4: Creating Kafka producer/consumer applications in Java</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="execution"><a class="anchor" href="#execution"></a>6.1. Execution</h3>
-<div class="sect3">
-<h4 id="prepare-the-environment"><a class="anchor" href="#prepare-the-environment"></a>6.1.1. Prepare the environment</h4>
+<h3 id="main-goals-4"><a class="anchor" href="#main-goals-4"></a>6.1. Main goals</h3>
 <div class="paragraph">
-<p>Execute the following sessions in the previous lab (<a href="#lab3">Lab3: Starting Kafka with 3 Brokers and 3 Partitions (using a JVM)</a>):</p>
+<p>Understand in practice &#8230;&#8203;</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><a href="#lab3-1">Download, extract Kafka, and change to its directory</a>.</p>
-</li>
-<li>
-<p><a href="#lab3-2">Configure the file server.properties for the Kafka servers</a>.</p>
-</li>
-<li>
-<p><a href="#lab3-3">Start the Kafka cluster (1 ZooKeeper + 3 Brokers)</a>.</p>
+<p>How to develop Java applications that uses the Kafka infrastructure.</p>
 </li>
 </ol>
 </div>
 </div>
+<div class="sect2">
+<h3 id="execution"><a class="anchor" href="#execution"></a>6.2. Execution</h3>
 <div class="sect3">
-<h4 id="create-a-topic-4"><a class="anchor" href="#create-a-topic-4"></a>6.1.2. Create a topic</h4>
+<h4 id="preparing-the-environment"><a class="anchor" href="#preparing-the-environment"></a>6.2.1. Preparing the environment</h4>
+<div class="paragraph">
+<p>Make sure you did the <a href="#lab3-cleanup">cleanup for the lab3</a>.</p>
+</div>
+<div class="paragraph">
+<p>Start the ZooKeeper server and one Kafka broker with the following
+command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ start-servers lab4</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This last command will start a new tmux session running each server in
+their own pane.
+Attach to this tmux session:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ tmux attach</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="creating-a-topic-4"><a class="anchor" href="#creating-a-topic-4"></a>6.2.2. Creating a topic</h4>
 <div class="paragraph">
 <p>Create a new tmux window (<span class="keyseq"><kbd>Ctrl</kbd>+<kbd>b</kbd>+<kbd>c</kbd></span> on tmux) and create a topic:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre>$ bin/kafka-topics.sh --create --topic user-tracking \
---zookeeper localhost:2181 \
---replication-factor 3 --partitions 3
-Created topic user-tracking.</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>See the topic details:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>$ bin/kafka-topics.sh --describe —topic user-tracking \
 --zookeeper localhost:2181</pre>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">Expected output:</div>
+<div class="listingblock">
+<div class="content">
+<pre>Created topic user-tracking.</pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect3">
-<h4 id="run-the-consumer-application"><a class="anchor" href="#run-the-consumer-application"></a>6.1.3. Run the consumer application</h4>
+<h4 id="running-the-consumer-application"><a class="anchor" href="#running-the-consumer-application"></a>6.2.3. Running the consumer application</h4>
 <div class="listingblock">
 <div class="content">
 <pre>$ lab4-dir &amp;&amp; cd user-tracking-consumer
@@ -1240,7 +1438,7 @@ $ mvn compile exec:java -Dexec.mainClass="com.example.kafka.consumer.Main"</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="running-the-producer-application"><a class="anchor" href="#running-the-producer-application"></a>6.1.4. Running the producer application</h4>
+<h4 id="running-the-producer-application"><a class="anchor" href="#running-the-producer-application"></a>6.2.4. Running the producer application</h4>
 <div class="paragraph">
 <p>Start a new terminal (with <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>b</kbd>+<kbd>"</kbd></span> on tmux) and type:</p>
 </div>
@@ -1257,13 +1455,13 @@ the consumer application.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="tutorial"><a class="anchor" href="#tutorial"></a>6.2. Tutorial</h3>
+<h3 id="tutorial"><a class="anchor" href="#tutorial"></a>6.3. Tutorial</h3>
 <div class="paragraph">
 <p>TODO</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="clean-up-2"><a class="anchor" href="#clean-up-2"></a>6.3. Clean Up</h3>
+<h3 id="doing-the-cleanup-3"><a class="anchor" href="#doing-the-cleanup-3"></a>6.4. Doing the cleanup</h3>
 <div class="paragraph">
 <p>Follow the same steps described in the <a href="#lab3-clean-up">cleanup session
 of the previous lab</a>.</p>
@@ -1294,7 +1492,16 @@ to be made in Kafka to turn on SSL Encryption.</p>
 <div class="sect1">
 <h2 id="lab7"><a class="anchor" href="#lab7"></a>9. Lab7: SASL Authentication - Kerberos GSSAPI</h2>
 <div class="sectionbody">
-
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="lab8"><a class="anchor" href="#lab8"></a>10. Lab8: Running Kafka on Kubernetes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Please, <a href="https://paulojeronimo.com/kubernetes-labs/#lab4" target="_blank" rel="noopener">read this lab</a> on
+<a href="https://paulojeronimo.com/kubernetes-labs" target="_blank" rel="noopener">my Kubernetes labs</a>.</p>
+</div>
 </div>
 </div>
 </div>
