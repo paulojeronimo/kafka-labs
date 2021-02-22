@@ -444,17 +444,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="details">
 <span id="author" class="author">Paulo Jerônimo</span><br>
 <span id="email" class="email"><a href="mailto:pj@paulojeronimo.com">pj@paulojeronimo.com</a></span><br>
-<span id="revdate">2021-02-13 10:58:40 -0300</span>
+<span id="revdate">2021-02-22 14:28:53 -0300</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#introduction">1. Introduction</a>
 <ul class="sectlevel2">
-<li><a href="#prerequisites">1.1. Prerequisites</a>
+<li><a href="#my-environment">1.1. My environment</a>
 <ul class="sectlevel3">
-<li><a href="#on-macos">1.1.1. On macOS</a></li>
-<li><a href="#on-linux">1.1.2. On Linux</a></li>
+<li><a href="#macos">1.1.1. macOS</a></li>
+<li><a href="#linux">1.1.2. Linux</a></li>
 <li><a href="#notes">1.1.3. Notes</a></li>
 </ul>
 </li>
@@ -465,7 +465,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#lab1">3. Lab1: Quickstart (using a JVM)</a>
 <ul class="sectlevel2">
 <li><a href="#main-goals">3.1. Main goals</a></li>
-<li><a href="#prerequisites-2">3.2. Prerequisites</a></li>
+<li><a href="#prerequisites">3.2. Prerequisites</a></li>
 <li><a href="#downloading-and-extracting-kafka">3.3. Downloading and extracting Kafka</a></li>
 <li><a href="#starting-tmux">3.4. Starting tmux</a></li>
 <li><a href="#starting-the-zookeeper-server">3.5. Starting the ZooKeeper server</a></li>
@@ -481,7 +481,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#lab2">4. Lab2: Quickstart (using Docker)</a>
 <ul class="sectlevel2">
 <li><a href="#main-goals-2">4.1. Main goals</a></li>
-<li><a href="#prerequisites-3">4.2. Prerequisites</a></li>
+<li><a href="#prerequisites-2">4.2. Prerequisites</a></li>
 <li><a href="#launching-confluent-platform">4.3. Launching Confluent Platform</a></li>
 <li><a href="#creating-a-topic-2">4.4. Creating a topic</a></li>
 <li><a href="#starting-a-console-consumer">4.5. Starting a console consumer</a></li>
@@ -519,13 +519,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#doing-the-cleanup-3">6.4. Doing the cleanup</a></li>
 </ul>
 </li>
-<li><a href="#lab5">7. Lab5: SSL Security (part 1 - SSL Encryption)</a>
-<ul class="sectlevel2">
-<li><a href="#introduction-2">7.1. Introduction</a></li>
-</ul>
-</li>
-<li><a href="#lab6">8. Lab6: SSL Security (part 2 - SSL Authentication)</a></li>
-<li><a href="#lab7">9. Lab7: SASL Authentication - Kerberos GSSAPI</a></li>
+<li><a href="#lab5">7. Lab5: Kafka SSL Encryption (using LXD)</a></li>
+<li><a href="#lab6">8. Lab6: Kafka SSL Authentication (using LXD)</a></li>
+<li><a href="#lab7">9. Lab7: Kafka SASL Authentication (Kerberos GSSAPI) (using LXD)</a></li>
 <li><a href="#lab8">10. Lab8: Running Kafka on Kubernetes</a></li>
 </ul>
 </div>
@@ -540,8 +536,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="introduction"><a class="anchor" href="#introduction"></a>1. Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This document shows you some <a href="https://kafka.apache.org" target="_blank" rel="noopener">Kafka</a> labs which I made in my own
-environment (<a href="#on-macos">On macOS</a> or <a href="#on-linux">On Linux</a>) by following (and sometimes
+<p>This document shows you some <a href="https://kafka.apache.org" target="_blank" rel="noopener">Kafka</a> labs which I made in
+<a href="#my-environment">my own environment</a> (using <a href="#macos">macOS</a> or <a href="#linux">Linux</a> in
+in <a href="#my-home-network">my home network</a>) by following (and sometimes
 adapting) tutorials that I read on the Internet.
 I let the references available inside the labs in order to give you a
 chance to explore more.</p>
@@ -555,18 +552,19 @@ By doing this I can repeat my steps in a more practical, quick, and
 effective way.</p>
 </div>
 <div class="sect2">
-<h3 id="prerequisites"><a class="anchor" href="#prerequisites"></a>1.1. Prerequisites</h3>
+<h3 id="my-environment"><a class="anchor" href="#my-environment"></a>1.1. My environment</h3>
 <div class="sect3">
-<h4 id="on-macos"><a class="anchor" href="#on-macos"></a>1.1.1. On macOS</h4>
+<h4 id="macos"><a class="anchor" href="#macos"></a>1.1.1. macOS</h4>
 <div class="paragraph">
-<p>Operating System (OS) version:</p>
+<p>In these labs, I am using the <a href="https://www.apple.com/br/macos/big-sur/" target="_blank" rel="noopener">macOS</a> Operating System (OS) with the
+following softwares (and versions):</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre>$ sw_vers
-ProductName:	Mac OS X
-ProductVersion:	10.15.7
-BuildVersion:	19H2</pre>
+ProductName:	macOS
+ProductVersion:	11.2.1
+BuildVersion:	20D74</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -588,20 +586,48 @@ git version 2.30.1</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>GNU versions of sed and grep (you can use Homebrew to install it):</p>
+<p>GNU versions of <code>sed</code> and <code>grep</code> (installed using Homebrew):</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre>$ gsed --version | head -1
-gsed (GNU sed) 4.8
-
-$ gsed --version | head -1
 gsed (GNU sed) 4.8</pre>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+On my environment <code>sed</code> is just a Bash function that calls <code>gsed</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ ggrep --version | head -1
+ggrep (GNU grep) 3.6</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+In the same way, <code>grep</code> in my environment is just a Bash function
+that calls <code>ggrep</code>.
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect3">
-<h4 id="on-linux"><a class="anchor" href="#on-linux"></a>1.1.2. On Linux</h4>
+<h4 id="linux"><a class="anchor" href="#linux"></a>1.1.2. Linux</h4>
 <div class="paragraph">
 <p>TODO</p>
 </div>
@@ -611,8 +637,12 @@ gsed (GNU sed) 4.8</pre>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>I don&#8217;t use the Microsoft Windows operating systems and I can&#8217;t help
-you if you are using them to reproduce my <a href="#labs">Labs</a>.</p>
+<p><a id="my-home-network"></a> <a href="https://paulojeronimo.com/my-home-network" target="_blank" rel="noopener">Read this</a> if you want know
+more details about my home network.</p>
+</li>
+<li>
+<p><span class="red">I don&#8217;t use the Microsoft Windows operating systems</span>.
+I can&#8217;t help you if you are using them to reproduce my <a href="#labs">Labs</a>.</p>
 </li>
 <li>
 <p>Some of these labs have specific prerequisites.</p>
@@ -641,13 +671,13 @@ you if you are using them to reproduce my <a href="#labs">Labs</a>.</p>
 <p><a href="#lab4">Lab4: Creating Kafka producer/consumer applications in Java</a>.</p>
 </li>
 <li>
-<p><a href="#lab5">Lab5: SSL Security (part 1 - SSL Encryption)</a>.</p>
+<p><a href="#lab5">Lab5: Kafka SSL Encryption (using LXD)</a>.</p>
 </li>
 <li>
-<p><a href="#lab6">Lab6: SSL Security (part 2 - SSL Authentication)</a>.</p>
+<p><a href="#lab6">Lab6: Kafka SSL Authentication (using LXD)</a>.</p>
 </li>
 <li>
-<p><a href="#lab7">Lab7: SASL Authentication - Kerberos GSSAPI</a>.</p>
+<p><a href="#lab7">Lab7: Kafka SASL Authentication (Kerberos GSSAPI) (using LXD)</a>.</p>
 </li>
 <li>
 <p><a href="#lab8">Lab8: Running Kafka on Kubernetes</a>.</p>
@@ -675,10 +705,10 @@ $ cd `basename $_` &amp;&amp; source functions.sh</pre>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Maybe you have to install some specific software when trying to run the
-last command (<code>source funcions.sh</code>).
-Especially if you are running it <a href="#on-macos">On macOS</a> environment.
-So, pay attention to its output.</p>
+<p>Maybe you have to install some specific software when running the
+last command (<code>source functions.sh</code>).
+Especially if you are running it on a <a href="#macos">macOS</a> environment,
+so please pay attention to its output.</p>
 </div>
 </td>
 </tr>
@@ -716,7 +746,7 @@ So, pay attention to its output.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="prerequisites-2"><a class="anchor" href="#prerequisites-2"></a>3.2. Prerequisites</h3>
+<h3 id="prerequisites"><a class="anchor" href="#prerequisites"></a>3.2. Prerequisites</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -950,7 +980,7 @@ $ rm -rf /tmp/kafka-logs /tmp/zookeeper</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="prerequisites-3"><a class="anchor" href="#prerequisites-3"></a>4.2. Prerequisites</h3>
+<h3 id="prerequisites-2"><a class="anchor" href="#prerequisites-2"></a>4.2. Prerequisites</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -1471,26 +1501,19 @@ the consumer application.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="lab5"><a class="anchor" href="#lab5"></a>7. Lab5: SSL Security (part 1 - SSL Encryption)</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="introduction-2"><a class="anchor" href="#introduction-2"></a>7.1. Introduction</h3>
-<div class="paragraph">
-<p>This lab will use some steps we did on <a href="#lab1">Lab 1</a> to explain what needs
-to be made in Kafka to turn on SSL Encryption.</p>
-</div>
-<div style="page-break-after: always;"></div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="lab6"><a class="anchor" href="#lab6"></a>8. Lab6: SSL Security (part 2 - SSL Authentication)</h2>
+<h2 id="lab5"><a class="anchor" href="#lab5"></a>7. Lab5: Kafka SSL Encryption (using LXD)</h2>
 <div class="sectionbody">
 <div style="page-break-after: always;"></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="lab7"><a class="anchor" href="#lab7"></a>9. Lab7: SASL Authentication - Kerberos GSSAPI</h2>
+<h2 id="lab6"><a class="anchor" href="#lab6"></a>8. Lab6: Kafka SSL Authentication (using LXD)</h2>
+<div class="sectionbody">
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="lab7"><a class="anchor" href="#lab7"></a>9. Lab7: Kafka SASL Authentication (Kerberos GSSAPI) (using LXD)</h2>
 <div class="sectionbody">
 <div style="page-break-after: always;"></div>
 </div>
